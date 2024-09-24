@@ -1,0 +1,12 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+ 
+  config.vm.box = "ubuntu-server"
+  config.vm.hostname = "server-rmg"
+    vp.memory = 2048
+    vp.cpus = 2
+  config.vm.synced_folder "./datazo", "/data"
+
+end
