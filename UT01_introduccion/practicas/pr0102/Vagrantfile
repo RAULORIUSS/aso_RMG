@@ -1,0 +1,21 @@
+Vagrant.configure("2") do |config|
+  config.vm.define "win19server" do |serverwindows|
+    serverwindows.vm.box = "gusztavvargadr/windows-server-2019-standard"
+    serverwindows.vm.hostname = "win19server"
+    serverwindows.vm.network "private_network",ip: "192.68.0.10"
+    serverwindows.vm.provider "virtualbox" do |vb|
+      vb.memory = "4096"
+      vb.cpus = 4
+    end
+  end
+  config.vm.define "win10user" do |windowsusuario|
+    windowsusuario.vm.box = "gusztavvargadr/windows-10"
+    windowsusuario.vm.hostname = "win10user"
+    windowsusuario.vm.network "private_network",ip: "192.68.0.20"
+    windowsusuario.vm.provider "virtualbox" do |vb|
+      vb.memory = "4096"
+      vb.cpus = 2
+    end
+  end
+end
+```

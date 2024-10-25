@@ -1,0 +1,1 @@
+{"virtualbox":{"/var/www/html/":{"guestpath":"/var/www/html","hostpath":"C:/Users/Alumno/Desktop/aso_RMG/UT01_introduccion/practicas/pr0103/sincronizar","disabled":false,"__vagrantfile":true},"/vagrant":{"guestpath":"/vagrant","hostpath":"C:/Users/Alumno/Desktop/aso_RMG/UT01_introduccion/practicas/pr0103","disabled":false,"__vagrantfile":true}}}
