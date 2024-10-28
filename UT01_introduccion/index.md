@@ -1,1 +1,1 @@
-[pr0101](.\UT01_introduccion\practicas\pr0101\memoria_pr0101.md)
+[pr0101](.\practicas\pr0101\memoria_pr0101.md)
