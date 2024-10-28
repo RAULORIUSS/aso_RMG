@@ -29,7 +29,7 @@ end
 ```
 
 ## Comprobación del funcionamiento de la máquina
-Nos conectamos con 
+Nos conectamos a la maquina con
 ```
 vagrant rdp win19server
 vagrant rdp win10user
