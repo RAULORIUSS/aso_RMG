@@ -47,13 +47,21 @@ crontab -e
 # 15
 cron.d:
 Este directorio contiene archivos de configuración para tareas de cron que no encajan en las categorías de tareas diarias, semanales, mensuales, etc. 
+
 cron.allow:
 si existe solo los usuarios que están listados en dicho fichero pueden crear, editar, mostrar o eliminar ficheros crontab.
+
 cron.deny:
 Si existe solo cron.deny, los usuarios en esa lista no podrán usar cron, pero todos los demás sí.
+
 cron.daily:
 Este directorio contiene scripts o archivos que se ejecutan automáticamente una vez al día
+
 cron.hourly:
 En este directorio se almacenan scripts o tareas que se ejecutan una vez por hora. 
+
 cron.monthly:
 Este directorio contiene scripts o archivos que se ejecutan una vez al mes. 
+
+
+[Volver](../../index.md)

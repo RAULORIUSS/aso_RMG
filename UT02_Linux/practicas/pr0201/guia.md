@@ -168,9 +168,11 @@ $ rm /compartido/archivo2.txt
 rm: remove write-protected regular empty file '/compartido/archivo2.txt'? y
 rm: cannot remove '/compartido/archivo2.txt': Operation not permitted
 ```
-## 6.1
-### 6.1.1
+## 4.6
+### 4.6.1
 El sticky bit en un directorio restringe la eliminación o renombramiento de archivos dentro de ese directorio. Específicamente, solo el propietario del archivo (o el usuario root) puede eliminar o renombrar archivos en un directorio con sticky bit, incluso si otros usuarios tienen permisos de escritura en ese directorio.
-### 6.1.2
+### 4.6.2
 El propietario del fichero.
 O tener privilegios de superusuario (root).
+
+[Volver](../../index.md)
