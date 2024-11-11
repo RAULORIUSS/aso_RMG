@@ -27,7 +27,6 @@ fi
 ```
 ## 3
 ```bash
-#!/bin/bash
 read -p "Introduce el primer número: " numero1
 read -p "Introduce el segundo número: " numero2
 

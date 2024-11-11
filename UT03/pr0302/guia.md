@@ -85,24 +85,73 @@ esac
 read -p "escoja el tipo de temperatura que quieras ingresar" temp1
 read -p "escoja la temperatura que quieras ingresar" num
 
-CK=$( expr $num + 273)
-CF=$( expr ( expr $num \* 1.8) + 32)
-KC=$( expr $num - 273)
-KF=$( expr ( expr $KC \* 1.8) + 32)
-FC=$( expr ( expr $num - 32) / 1.8)
-FK=$( expr ( expr ( expr $num - 32) / 1.8) + 273)
+CK=$(( $num + 273 ))
+CF=$((  $(( $num * 2 )) + 32 ))
+KC=$(( $num - 273 ))
+KF=$(( $((  $KC * 2 )) + 32 ))
+FC=$((  $((  $num - 32 )) / 2 ))
+FK=$(( $((  $((  $num - 32 )) / 2 )) + 273 ))
 
 case $temp1 in
     [Cc]elsius)
        read -p "a que lo quieres pasar" temp2
          case $temp2 in
             [Kk]elvin)
-
-
-;;
-    [Kk]elvin)
-       echo "tu resultado es $resulresta";;
+               echo "tu resultado es $CK";;
+            [Ff]ahrenheit)
+                echo "tu resultado es $CF";;
+         esac ;;
+     [Kk]elvin)
+       read -p "a que lo quieres pasar" temp2
+         case $temp2 in
+            [Cc]elsius)
+               echo "tu resultado es $KC";;
+            [Ff]ahrenheit)
+                echo "tu resultado es $CF";;
+         esac ;;
    [Ff]ahrenheit)
-      echo "tu resultado es $resulmult";;
+       read -p "a que lo quieres pasar" temp2
+         case $temp2 in
+            [Cc]elsius)
+               echo "tu resultado es $FC";;
+            [Kk]elvin)
+                echo "tu resultado es $FK";;
+         esac ;;
 esac
+```
+## 7
+```bash
+#!/bin/bash
+read -p "introduce tu servicio: " serv
+read -p "que quieres hacer: " op
+   case $op in
+      iniciar)
+         systemctl start $serv
+         echo "$serv se ha iniciado";;
+      reiniciar)
+         systemctl stop $serv
+         echo "$serv se ha reiniciado";;
+      detener)
+         systemctl restart $serv
+         echo "$serv se ha detenido";;
+   esac
+
+```
+## 8
+```bash
+#!/bin/bash
+read -p "introduce numero de metros: " metro
+read -p "introduce a que unidad lo quieres pasar: " uni
+
+km=$(( $metro / 1000 ))
+cm=$(( $metro * 100 ))
+mm=$(( $metro * 1000 ))
+   case $uni in
+      [Kk]ilometros)
+         echo "$km";;
+      [Cc]entimetros)
+         echo "$cm";;
+      [Mm]ilimetros)
+         echo "$mm";;
+   esac
 ```
