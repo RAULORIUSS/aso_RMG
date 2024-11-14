@@ -122,3 +122,5 @@ echo "Introduce tu edad:"read edadif (( edad < 18 ));thenecho "Eres menor de eda
 echo "Introduce un nombre de archivo:"read archivo
 if [ -e "$archivo" ];then                linea=$(wc -l  < "$archivo")echo "El archivo $archivo consta de $linea lineas"elseecho "El archivo $archivo no existe."fi
 ```
+
+[Volver](../../index.md)
