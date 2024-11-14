@@ -223,7 +223,7 @@ for letra in $(echo $cadena | grep -o .);
          done
 echo "La cadena tiene $vocales vocales"
 ```
- ## 19
+## 19
  ```bash
 #!/bin/bash
 numero=0
