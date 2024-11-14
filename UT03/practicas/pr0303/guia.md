@@ -1,6 +1,6 @@
 # ejercicios while, until y for
  
- ## 1
+## 1
  ```bash
 #!/bin/bash
 for contador in {1..10}
@@ -8,7 +8,7 @@ do
    echo "$contador"
 done
  ```
- ## 2
+## 2
  ```bash
 #!/bin/bash
 sum=0
@@ -19,7 +19,7 @@ do
 done
 echo "$sum"
  ```
- ## 3
+## 3
  ```bash
 #!/bin/bash
 read -p  "dime un numero: " num
@@ -30,7 +30,7 @@ for i in {1..10}
       echo "$resultado"
 done
  ```
- ## 4
+## 4
 ```bash
 #!/bin/bash
 read -p "Escribe una palabra: " palabra
@@ -39,7 +39,7 @@ for letra in $(echo $palabra | grep -o .);
   echo $letra
 done
 ```
- ## 5
+## 5
  ```bash
 #!/bin/bash
 i=2
@@ -50,7 +50,7 @@ echo "$i"
 i=$(( $i + 2 ))
 done
  ```
- ## 6
+## 6
 ```bash
 #!/bin/bash
 read -p "Escribe un número: " num
@@ -63,7 +63,7 @@ while [ $num -gt 0 ];
 done
 echo "La suma de los dígitos es: $suma"
 ```
- ## 7
+## 7
  ```bash
 #!/bin/bash
 
@@ -75,7 +75,7 @@ do
    num=$(( $num - 1 ))
 done
  ```
- ## 8
+## 8
  ```bash
 #!/bin/bash
 echo "Escribe el nombre del directorio:"
@@ -91,7 +91,7 @@ for archivo in *;
 done
 else
  ```
- ## 9 
+## 9 
  ```bash
 #!/bin/bash
 
@@ -141,7 +141,7 @@ for ((i=1; i<=n; i++));
   date
 done
 ```
- ## 13
+## 13
  ```bash
 #!/bin/bash
 
@@ -166,7 +166,7 @@ read -p "Escribe una frase: " frase
 num_palabra=$(echo $frase | wc -w)
 echo "La frase tiene $num_palabra palabras"
 ```
- ## 15
+## 15
  ```bash
 #!/bin/bash
 numero=$((RANDOM % 100 + 1))
@@ -209,7 +209,7 @@ for ((x=1; x<=n; x++));
 done
 echo "$n archivos creados"
 ```
- ## 18
+## 18
 ```bash
 #!/bin/bash
 read -p "Escribe una cadena: " cadena
