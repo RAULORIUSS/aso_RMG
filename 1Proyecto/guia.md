@@ -54,4 +54,4 @@ echo "Escaneo completado. Resultados almacenados en $archivo_salida."
 end_time=$(date +%s)
 echo "Tiempo de escaneo: $(($end_time - $start_time)) segundos" >> "$archivo_salida"
 ```
-[Volver](../../index.md)
+[Volver](../index.md)
