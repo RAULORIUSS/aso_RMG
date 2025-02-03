@@ -26,6 +26,103 @@ if [[ ! $RED_CIDR =~ ^([0-9]{1,3}\.){3}[0-9]{1,3}/(8|16|24)$ ]]; then
     exit 1
 fi
 ```
+Se usa una expresión regular para validar la IP y la máscara de red.
+### 3 Extraer IP base y máscara
+```bash
+IP_BASE=$(echo "$RED_CIDR" | cut -d '/' -f1)
+MASK=$(echo "$RED_CIDR" | cut -d '/' -f2)
+```
+cut -d '/' -f1: Extrae la parte de la dirección IP.
+
+cut -d '/' -f2: Extrae la máscara de subred.
+### 4 Generar el rango de IPs a escanear
+Dependiendo de la máscara (/8, /16, /24), se define el rango de direcciones:
+```bash
+if [ "$MASK" == "8" ]; then
+    SUBNET="$i1"
+    RANGO_INICIO=1
+    RANGO_FIN=254
+    SEGMENTOS=3
+elif [ "$MASK" == "16" ]; then
+    SUBNET="$i1.$i2"
+    RANGO_INICIO=1
+    RANGO_FIN=254
+    SEGMENTOS=2
+elif [ "$MASK" == "24" ]; then
+    SUBNET="$i1.$i2.$i3"
+    RANGO_INICIO=1
+    RANGO_FIN=254
+    SEGMENTOS=1
+else
+    echo "Máscara no soportada. Solo se permite /8, /16 o /24."
+    exit 1
+fi
+```
+### 5  Escaneo de dispositivos con ping
+```bash
+if ping -c 1 -W 1 "$IP" &> /dev/null; then
+```
+ping -c 1: Envía solo un paquete.
+
+-W 1: Espera 1 segundo para la respuesta.
+
+&> /dev/null: Oculta la salida para mejorar el rendimiento.
+
+### 6 Obtener la dirección MAC
+```bash
+sleep 1
+MAC=$(arp -n "$IP" 2>/dev/null | awk '/ether/ {print $3}')
+if [[ -z "$MAC" ]]; then
+    MAC=$(ip neigh show "$IP" | awk '{print $5}')
+fi
+```
+arp -n: Lista dispositivos en la caché ARP.
+
+ip neigh show: Alternativa moderna a arp.
+
+sleep 1: Da tiempo para que la tabla ARP se actualice.
+### 7 Detección del Sistema Operativo
+```bash
+TTL=$(ping -c 1 "$IP" | awk -F 'ttl=' '/ttl=/ {print $2}' | awk '{print $1}')
+if [[ -n "$TTL" ]]; then
+    if [[ "$TTL" -le 64 ]]; then
+        SO="Linux"
+    elif [[ "$TTL" -le 128 ]]; then
+        SO="Windows"
+    else
+        SO="Desconocido"
+    fi
+else
+    SO="No determinado"
+fi
+```
+ping -c 1 "$IP" | awk -F 'ttl=' '/ttl=/ {print $2}' | awk '{print $1}': Extrae el TTL.
+
+Se usa el valor TTL:
+
+Linux: TTL ≈ 64.
+
+Windows: TTL ≈ 128.
+
+Si es superior, se marca como desconocido.
+
+### 8 Escaneo de puertos abiertos
+```bash
+for PUERTO in $(seq 1 1024); do
+    nc -zv -w1 "$IP" "$PUERTO" 2>&1 | grep -q "succeeded" && echo "    - $PUERTO abierto"
+done
+```
+nc -zv -w1 $IP $PUERTO:
+
+-z: Solo escaneo, no envía datos.
+
+-v: Modo detallado.
+
+-w1: Espera 1 segundo por respuesta.
+
+## Codigo completo
+
+
 
 
 ```bash
@@ -138,5 +235,17 @@ DURACION=$((FIN - INICIO))
 echo "Escaneo completado en $DURACION segundos." | tee -a "$ARCHIVO_SALIDA"
 echo "Resultados guardados en $ARCHIVO_SALIDA"
 ```
+
+
+## Dificultades Encontradas y Soluciones
+### Problema 1: arp no encontrado
+Causa: Algunas distribuciones modernas no incluyen arp por defecto.
+🔹 Solución: Se reemplazó con ip neigh show
+
+### Problema 2: Detección incorrecta del Sistema Operativo
+ Causa: La extracción del TTL con grep no era precisa en algunos sistemas.
+🔹 Solución: Se usó awk para capturar el TTL de manera más confiable.
+
+
 [Volver](../index.md)
 
