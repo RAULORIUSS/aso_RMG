@@ -193,3 +193,5 @@ foreach ($curso in $cursos) {
 ## 7. Conclusión
 
 Este proyecto ha permitido diseñar e implementar un dominio de Active Directory para un centro educativo, garantizando un entorno funcional, seguro y fácil de administrar.
+
+[Volver](../index.md)
